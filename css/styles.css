@@ -166,3 +166,7 @@ li.project-item::before {
   margin-left: 17px;
   margin-bottom: 12px;
 }
+.experience li {
+  list-style: square;
+  list-style-position: inside;
+}
