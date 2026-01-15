@@ -7,10 +7,12 @@
   <title>Oleksandr Pilganchuk — Front-End Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
 
 <body>
-  <div class="wrapper">
+  <div id="cv" class="wrapper">
     <aside class="sidebar">
       <img class="my-photo" src="./img/photo-doc.png" alt="Oleksandr Pilganchuk" />
 
@@ -81,6 +83,9 @@
       <section>
         <h1 class="name">Oleksandr Pilganchuk</h1>
         <h2>Front-End Developer</h2>
+        <button id="download-pdf" class="cv-download">
+          Download CV (PDF)
+        </button>
 
         <h3 class="rubric">Summary</h3>
         <p class="description">
@@ -176,6 +181,32 @@
       </section>
     </main>
   </div>
+
+  <script>
+    document.getElementById('download-pdf').addEventListener('click', () => {
+      const cv = document.getElementById('cv');
+      const button = document.getElementById('download-pdf');
+      button.classList.add('hidden-for-pdf');
+
+
+      html2canvas(cv, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        const pdf = new jspdf.jsPDF({
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait'
+        });
+
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('Оleksandr_Pilganchuk_Frontend_CV.pdf');
+        button.classList.remove('hidden-for-pdf');
+      });
+    });
+  </script>
 </body>
 
 </html>

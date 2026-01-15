@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Montserrat;
+    font-family: Montserrat;
 }
 a {
   text-decoration: none;
@@ -45,6 +45,7 @@ li.project-item::before {
   box-shadow: #e2e2e2 2px 0px 7px 3px;
 }
 .about-me-container {
+  position: relative;
   padding: 54px;
 }
 .skills-container {
@@ -169,4 +170,34 @@ li.project-item::before {
 .experience li {
   list-style: square;
   list-style-position: inside;
+}
+
+
+.cv-download {
+  position: fixed;
+  top: 36px;
+  right: 23%;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(30, 80, 160);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.cv-download.hidden-for-pdf {
+  display: none;
+}
+
+.cv-download:hover {
+  background-color: rgb(92, 146, 300);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cv-download:active {
+ box-shadow: none;
 }
